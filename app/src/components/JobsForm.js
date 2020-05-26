@@ -3,25 +3,20 @@ import { connect } from 'react-redux';
 import { getJobs, toggleFullTime, updateLocation, updateDescription } from '../actions';
 
 class JobsForm extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      location: '',
-      description: '',
-      full_time: false
-    }
+  state = {
+    description: '',
+    location: '',
+    full_time: false
   }
 
   handleChanges = e => {
     e.preventDefault();
-    e.target.name === 'description' ? updateDescription(e.target.value) : updateLocation(e.target.value)
-    this.setState({ [e.target.name]: e.target.value })
-  }
-
-  toggleFullTime = () => {
-    console.log(this.state.full_time)
-    toggleFullTime(this.state.full_time)
-    this.setState({ full_time: !this.state.full_time })
+    console.log(this.props)
+    this.setState({
+      ...this.state,
+      [e.target.name]: e.target.value
+    })
+    console.log(this.state)
   }
 
   fetchJobs = e =>{
@@ -31,14 +26,13 @@ class JobsForm extends React.Component {
   };
 
   render() {
-    console.log(this.props)
     return (
       <>
         <h2>Find Tech Jobs</h2>
         <form>
           <input name="description" type="text" placeholder="Description" value={this.state.description} onChange={this.handleChanges} /><br />
           <input name="location" type="text" placeholder="Location" value={this.state.location} onChange={this.handleChanges} /><br />
-          <input name="full_time" type="checkbox" checked={this.state.full_time} onChange={this.toggleFullTime} />Full-Time?<br />
+          <input name="full_time" type="checkbox" checked={this.state.full_time} onChange={this.props.toggleFullTime} />Full-Time?<br />
           <button onClick={this.fetchJobs} type="submit">Search Jobs</button>
         </form>
       </>
@@ -46,13 +40,15 @@ class JobsForm extends React.Component {
   }
 };
 
-const mapStateToProps = state => ({
-  description: state.description,
-  location: state.location,
-  full_time: state.full_time,
-  fetchUrl: state.fetchUrl
-
-});
+const mapStateToProps = state => {
+  console.log(state);
+  return {
+    description: state.description,
+    location: state.location,
+    full_time: state.full_time,
+    fetchUrl: state.fetchUrl
+  }
+};
 
 export default connect(
   mapStateToProps,

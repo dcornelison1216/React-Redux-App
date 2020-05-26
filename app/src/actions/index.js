@@ -18,8 +18,8 @@ export const getJobs = (url) => dispatch => {
     .catch(err => dispatch({ type: FETCH_JOBS_FAIL, payload: err}));
 };
 
-export const toggleFullTime = isFullTime => dispatch => {
-  dispatch({ type: TOGGLE_FULL_TIME, payload: isFullTime });
+export const toggleFullTime = () => dispatch => {
+  dispatch({ type: TOGGLE_FULL_TIME });
 };
 
 export const updateLocation = loc => dispatch => {
