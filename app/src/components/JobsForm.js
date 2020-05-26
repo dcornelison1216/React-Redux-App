@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { getJobs, toggleFullTime, updateLocation, updateDescription } from '../actions';
+import { getJobs, toggleFullTime, updateLocation, updateDescription, buildFetchUrl } from '../actions';
 
 class JobsForm extends React.Component {
   state = {
@@ -27,24 +27,9 @@ class JobsForm extends React.Component {
   }
 
   fetchJobs = e =>{
-    console.log('this.props.fetchUrl', this.props.fetchUrl)
     e.preventDefault();
-    const loc = this.props.location;
-    const desc = this.props.description;
-    const url = this.props.fetchUrl;
-    let newUrl = url;
-    if(desc.length > 0) {
-      newUrl = newUrl + '&description=' + desc
-    }
-    if(loc.length > 0) {
-      newUrl = newUrl + '&location=' + loc
-    }
-    if(this.props.full_time) {
-      newUrl = newUrl + '&full_time=true'
-    } else if(!this.props.full_time) {
-      newUrl = newUrl + '&full_time=false'
-    }
-    this.props.getJobs(newUrl);
+    this.props.buildFetchUrl();
+    this.props.getJobs(this.props.fetchUrl);
   };
 
   render() {
@@ -73,5 +58,5 @@ const mapStateToProps = state => {
 
 export default connect(
   mapStateToProps,
-  { getJobs, toggleFullTime, updateLocation, updateDescription }
+  { getJobs, toggleFullTime, updateLocation, updateDescription, buildFetchUrl }
 )(JobsForm);

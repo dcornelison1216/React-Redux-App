@@ -1,4 +1,12 @@
-import { FETCH_JOBS_START, FETCH_JOBS_FAIL, FETCH_JOBS_SUCCESS, TOGGLE_FULL_TIME, UPDATE_DESCRIPTION, UPDATE_LOCATION } from '../actions';
+import {
+  FETCH_JOBS_START,
+  FETCH_JOBS_FAIL,
+  FETCH_JOBS_SUCCESS,
+  TOGGLE_FULL_TIME,
+  UPDATE_DESCRIPTION,
+  UPDATE_LOCATION,
+  BUILD_FETCH_URL
+} from '../actions';
 
 export const initialState = {
   jobs: [],
@@ -45,6 +53,26 @@ export const jobsReducer = (state = initialState, action) => {
       return {
         ...state,
         location: action.payload
+      }
+    case BUILD_FETCH_URL:
+      const url = 'https://cors-anywhere.herokuapp.com/https://jobs.github.com/positions.json?';
+      const desc = state.description;
+      const loc = state.location;
+      let newUrl = url;
+      if(desc.length > 0) {
+        newUrl = newUrl + '&description=' + desc
+      }
+      if(loc.length > 0) {
+        newUrl = newUrl + '&location=' + loc
+      }
+      if(state.full_time) {
+        newUrl = newUrl + '&full_time=true'
+      } else if(!state.full_time) {
+        newUrl = newUrl + '&full_time=false'
+      }
+      return {
+        ...state,
+        fetchUrl: newUrl
       }
     default:
       return state;
