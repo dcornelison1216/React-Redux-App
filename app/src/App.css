@@ -1,7 +1,8 @@
 .App {
   text-align: center;
   background: #0B783D;
-  height: 100vh;
+  height: 100%;
+  min-height: 100vh;
 }
 
 .App-logo {
@@ -37,4 +38,72 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+.logo {
+  width: 100px;
+  height: auto;
+  text-align: right;
+  align-items: right;
+  z-index: 2;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+
+.job {
+  width: 100%;
+  margin: 1rem;
+  background: white;
+  border-radius: 5px;
+  text-align: left;
+  padding: .5rem;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+a {
+  color: #0B783D;
+}
+
+.company {
+  display: inline;
+  height: auto;
+}
+
+.job-title {
+  margin-top: 0;
+  padding-top: 0;
+}
+
+.header {
+  margin-top: 1rem;
+}
+
+.submit {
+  border-radius: 5px
+}
+
+.inputs {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+}
+
+.full-time {
+  margin-top: 1.2rem;
+  margin-right: .1rem;
+}
+
+.ft-label {
+  margin-top: .4rem;
+}
+
+input {
+  padding: .5rem;
+  margin: .5rem;
 }

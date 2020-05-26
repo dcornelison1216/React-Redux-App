@@ -35,12 +35,15 @@ class JobsForm extends React.Component {
   render() {
     return (
       <>
-        <h2>Find Tech Jobs</h2>
-        <form>
-          <input name="description" type="text" placeholder="Description" value={this.state.description} onChange={this.handleChanges} /><br />
-          <input name="location" type="text" placeholder="Location" value={this.state.location} onChange={this.handleChanges} /><br />
-          <input name="full_time" type="checkbox" checked={this.state.full_time} onChange={this.toggleFullTime} />Full-Time?<br />
-          <button onClick={this.fetchJobs} type="submit">Search Jobs</button>
+        <h2 className='header'>Find Tech Jobs</h2>
+        <form className='form'>
+          <div className='inputs'>
+            <input name="description" type="text" placeholder="Description" value={this.state.description} onChange={this.handleChanges} />
+            <input name="location" type="text" placeholder="Location" value={this.state.location} onChange={this.handleChanges} />
+            <input className='full-time' id='ft' type="checkbox" checked={this.state.full_time} onChange={this.toggleFullTime} />
+            <p>Full-Time?</p>
+          </div>
+          <button onClick={this.fetchJobs} type="submit" className='submit'>Search Jobs</button>
         </form>
       </>
     );
