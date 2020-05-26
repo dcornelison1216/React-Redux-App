@@ -31,9 +31,10 @@ export const jobsReducer = (state = initialState, action) => {
         error: action.payload
       };
     case TOGGLE_FULL_TIME:
+      console.log(action.payload)
       return {
         ...state,
-        full_time: !state.full_time
+        full_time: action.payload
       };
     case UPDATE_DESCRIPTION:
       return {

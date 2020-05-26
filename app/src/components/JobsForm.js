@@ -9,19 +9,36 @@ class JobsForm extends React.Component {
     full_time: false
   }
 
+  toggleFullTime = () => {
+    this.setState({
+      ...this.state,
+      full_time: !this.state.full_time
+    });
+    this.props.toggleFullTime(this.state.full_time)
+  }
+
   handleChanges = e => {
     e.preventDefault();
-    console.log(this.props)
     this.setState({
       ...this.state,
       [e.target.name]: e.target.value
     })
-    console.log(this.state)
+    e.target.name === 'description' ? this.props.updateDescription(e.target.value) : this.props.updateLocation(e.target.value)
   }
 
   fetchJobs = e =>{
     console.log('this.props.fetchUrl', this.props.fetchUrl)
     e.preventDefault();
+    const loc = this.props.location;
+    const desc = this.props.description;
+    const url = this.props.fetchUrl;
+    let newUrl = url;
+    if(desc.length > 0) {
+      if(loc.length > 0) {
+        newUrl = newUrl + 'description=' + desc + '&location=' + loc
+      }
+    }
+    console.log('newUrl', newUrl)
     this.props.getJobs(this.props.fetchUrl);
   };
 
@@ -32,7 +49,7 @@ class JobsForm extends React.Component {
         <form>
           <input name="description" type="text" placeholder="Description" value={this.state.description} onChange={this.handleChanges} /><br />
           <input name="location" type="text" placeholder="Location" value={this.state.location} onChange={this.handleChanges} /><br />
-          <input name="full_time" type="checkbox" checked={this.state.full_time} onChange={this.props.toggleFullTime} />Full-Time?<br />
+          <input name="full_time" type="checkbox" checked={this.state.full_time} onChange={this.toggleFullTime} />Full-Time?<br />
           <button onClick={this.fetchJobs} type="submit">Search Jobs</button>
         </form>
       </>
@@ -41,7 +58,6 @@ class JobsForm extends React.Component {
 };
 
 const mapStateToProps = state => {
-  console.log(state);
   return {
     description: state.description,
     location: state.location,
