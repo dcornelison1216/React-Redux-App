@@ -14,7 +14,7 @@ class JobsForm extends React.Component {
       ...this.state,
       full_time: !this.state.full_time
     });
-    this.props.toggleFullTime(this.state.full_time)
+    this.props.toggleFullTime(!this.state.full_time)
   }
 
   handleChanges = e => {
@@ -34,12 +34,17 @@ class JobsForm extends React.Component {
     const url = this.props.fetchUrl;
     let newUrl = url;
     if(desc.length > 0) {
-      if(loc.length > 0) {
-        newUrl = newUrl + 'description=' + desc + '&location=' + loc
-      }
+      newUrl = newUrl + '&description=' + desc
     }
-    console.log('newUrl', newUrl)
-    this.props.getJobs(this.props.fetchUrl);
+    if(loc.length > 0) {
+      newUrl = newUrl + '&location=' + loc
+    }
+    if(this.props.full_time) {
+      newUrl = newUrl + '&full_time=true'
+    } else if(!this.props.full_time) {
+      newUrl = newUrl + '&full_time=false'
+    }
+    this.props.getJobs(newUrl);
   };
 
   render() {
