@@ -1,4 +1,4 @@
-import { FETCH_JOBS_START, FETCH_JOBS_FAIL, FETCH_JOBS_SUCCESS, TOGGLE_FULL_TIME, LOCATION_CHANGE, DESCRIPTION_CHANGE } from '../actions';
+import { FETCH_JOBS_START, FETCH_JOBS_FAIL, FETCH_JOBS_SUCCESS, TOGGLE_FULL_TIME, UPDATE_DESCRIPTION, UPDATE_LOCATION } from '../actions';
 
 export const initialState = {
   jobs: [],
@@ -11,8 +11,6 @@ export const initialState = {
 };
 
 export const jobsReducer = (state = initialState, action) => {
-  console.log('action', action);
-  console.log('state', state);
   switch(action.type) {
     case FETCH_JOBS_START:
       return {
@@ -33,20 +31,19 @@ export const jobsReducer = (state = initialState, action) => {
         error: action.payload
       };
     case TOGGLE_FULL_TIME:
-      console.log(state.full_time)
       return {
         ...state,
-        full_time: !state.full_time
+        full_time: action.payload
       };
-    case LOCATION_CHANGE:
+    case UPDATE_DESCRIPTION:
       return {
         ...state,
-        location: state.location
+        description: action.payload
       }
-    case DESCRIPTION_CHANGE:
+    case UPDATE_LOCATION:
       return {
         ...state,
-        description: state.description
+        location: action.payload
       }
     default:
       return state;
