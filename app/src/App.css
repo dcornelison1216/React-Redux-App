@@ -43,9 +43,8 @@
 .logo {
   width: 100px;
   height: auto;
-  text-align: right;
-  align-items: right;
-  z-index: 2;
+  margin-right: 3rem;
+  object-fit: scale-down;
 }
 
 .details {
@@ -68,6 +67,7 @@
 
 a {
   color: #0B783D;
+  text-decoration: none;
 }
 
 .company {

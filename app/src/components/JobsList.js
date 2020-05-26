@@ -3,6 +3,14 @@ import { connect } from 'react-redux';
 
 class JobsForm extends React.Component {
 
+  componentDidUpdate(prevProps) {
+    if(prevProps.text !== this.props.text) {
+      this.setState({
+        jobs: this.props.jobs
+      })
+    }
+  }
+
   render() {
     console.log('props from JobsList', this.props.jobs)
     const jobs = this.props.jobs
