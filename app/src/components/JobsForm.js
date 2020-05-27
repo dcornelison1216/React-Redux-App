@@ -30,6 +30,11 @@ class JobsForm extends React.Component {
     e.preventDefault();
     this.props.buildFetchUrl();
     this.props.getJobs(this.props.fetchUrl);
+    this.setState({
+      description: '',
+      location: '',
+      full_time: false
+    })
   };
 
   render() {
