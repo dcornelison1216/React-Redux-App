@@ -6,9 +6,7 @@ class JobsForm extends React.Component {
 
 
   render() {
-    console.log('props from JobsList', this.props.jobs)
     const jobs = this.props.jobs
-    console.log(jobs[0])
     return (
       <div>
         {jobs.map((job, index) => (

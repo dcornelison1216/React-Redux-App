@@ -13,7 +13,6 @@ export const getJobs = (url) => dispatch => {
   axios
     .get(url)
     .then(res => {
-      console.log('response', res.data)
       dispatch({ type: FETCH_JOBS_SUCCESS, payload: res.data })
     })
     .catch(err => dispatch({ type: FETCH_JOBS_FAIL, payload: err}));

@@ -39,7 +39,6 @@ export const jobsReducer = (state = initialState, action) => {
         error: action.payload
       };
     case TOGGLE_FULL_TIME:
-      console.log(action.payload)
       return {
         ...state,
         full_time: action.payload
@@ -72,7 +71,10 @@ export const jobsReducer = (state = initialState, action) => {
       }
       return {
         ...state,
-        fetchUrl: newUrl
+        fetchUrl: newUrl,
+        description: '',
+        location: '',
+        full_time: false
       }
     default:
       return state;
